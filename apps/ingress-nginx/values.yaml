@@ -1,10 +1,20 @@
 ingress-nginx:
   controller:
+    admissionWebhooks:
+      enabled: true
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      patch:
+        enabled: false
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
         operator: "Equal"
         value: "spot"
         effect: "NoSchedule"
+
   defaultBackend:
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
@@ -12,16 +22,17 @@ ingress-nginx:
         value: "spot"
         effect: "NoSchedule"
 
-  admissionWebhooks:
-    patch:
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
-      enabled: false
-    tolerations:
-      - key: "kubernetes.azure.com/scalesetpriority"
-        operator: "Equal"
-        value: "spot"
-        effect: "NoSchedule"
+  # admissionWebhooks:
+  #   enabled: true
+  #   patch:
+  #     tolerations:
+  #       - key: "kubernetes.azure.com/scalesetpriority"
+  #         operator: "Equal"
+  #         value: "spot"
+  #         effect: "NoSchedule"
+  #     enabled: false
+  #   tolerations:
+  #     - key: "kubernetes.azure.com/scalesetpriority"
+  #       operator: "Equal"
+  #       value: "spot"
+  #       effect: "NoSchedule"
