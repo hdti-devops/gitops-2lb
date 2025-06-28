@@ -16,7 +16,7 @@ metadata:
   namespace: sonarqube
 subjects:
   - kind: ServiceAccount
-    name: ingress-nginx
+    name: sonarqube-ingress-nginx
     namespace: sonarqube
 roleRef:
   kind: Role

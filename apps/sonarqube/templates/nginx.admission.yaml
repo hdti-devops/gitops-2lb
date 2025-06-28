@@ -4,20 +4,20 @@ metadata:
   name: ingress-nginx-admission-create
   namespace: sonarqube
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/component: admission-webhook
+    app.kubernetes.io/name: sonarqube-ingress-nginx
+    app.kubernetes.io/component: sonarqube-admission-webhook
 spec:
   template:
     spec:
-      serviceAccountName: ingress-nginx
+      serviceAccountName: sonarqube-ingress-nginx
       containers:
         - name: create
           image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.5.2
           args:
             - create
-            - --host=ingress-nginx-controller-admission,ingress-nginx-controller-admission.ingress-nginx.svc
+            - --host=sonarqube-ingress-nginx-controller-admission,sonarqube-ingress-nginx-controller-admission.sonarqube.svc
             - --namespace=sonarqube
-            - --secret-name=ingress-nginx-admission
+            - --secret-name=sonarqube-ingress-nginx-admission
       restartPolicy: OnFailure
       nodeSelector:
         kubernetes.io/os: linux
