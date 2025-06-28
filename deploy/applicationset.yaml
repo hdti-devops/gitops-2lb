@@ -2,10 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: apps-git-generator
+  namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: 'https://your.repo.url/your-repo.git'
+        repoURL: 'https://github.com/hdti-devops/gitops-2lb.git'
         revision: HEAD
         directories:
           - path: apps/*
@@ -28,4 +29,5 @@ spec:
         automated:
           prune: true
           selfHeal: true
-      createNamespace: true
+        syncOptions:
+          - CreateNamespace=true
