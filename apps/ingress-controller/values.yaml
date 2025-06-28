@@ -13,8 +13,8 @@ ingress-nginx:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
-      patch:
-        enabled: false
+      # patch:
+      #   enabled: false
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
         operator: "Equal"
