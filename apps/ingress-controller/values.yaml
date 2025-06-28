@@ -6,7 +6,6 @@ ingress-nginx:
     ingressClassResource:
       name: "nginx-controller"
     ingressClass: 'nginx-controller'
-  controller:
     admissionWebhooks:
       enabled: true
       tolerations:
