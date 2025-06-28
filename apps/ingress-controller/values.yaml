@@ -6,6 +6,8 @@ ingress-nginx:
     ingressClassResource:
       name: "nginx-controller"
     ingressClass: 'nginx-controller'
+    service:
+      externalTrafficPolicy: Local
     admissionWebhooks:
       enabled: true
       tolerations:
@@ -13,8 +15,12 @@ ingress-nginx:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
-      # patch:
-      #   enabled: false
+      patch:
+        tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
         operator: "Equal"
