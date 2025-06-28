@@ -5,3 +5,16 @@ ingress-nginx:
         operator: "Equal"
         value: "spot"
         effect: "NoSchedule"
+  defaultBackend:
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
+
+  admissionWebhooks:
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
