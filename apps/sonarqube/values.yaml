@@ -1,4 +1,11 @@
+namespace: sonarqube
+credentials:
+  adminSecretName: sonar-admin-secret
+  adminUsername: admin
+  adminPassword: admin
 sonarqube-dce:
+  monitoringPasscodeSecretName: "sonar-admin-secret"
+  monitoringPasscodeSecretKey: "password"
   tolerations:
     - key: "kubernetes.azure.com/scalesetpriority"
       operator: "Equal"
