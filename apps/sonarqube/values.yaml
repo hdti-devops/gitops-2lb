@@ -11,3 +11,47 @@ sonarqube-dce:
       operator: "Equal"
       value: "spot"
       effect: "NoSchedule"
+ingress-nginx:
+  namespaceOverride: sonarqube
+  commonLabels:
+    app.kubernetes.io/part-of-service: sonarqube
+  controller:
+    ingressClassResource:
+      name: "nginx-sonarqube"
+    ingressClass: 'nginx-sonarqube'
+    admissionWebhooks:
+      enabled: true
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      patch:
+        enabled: false
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
+
+  defaultBackend:
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
+
+  admissionWebhooks:
+    enabled: true
+    patch:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      enabled: false
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
