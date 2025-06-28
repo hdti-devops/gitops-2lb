@@ -22,17 +22,17 @@ ingress-nginx:
         value: "spot"
         effect: "NoSchedule"
 
-  # admissionWebhooks:
-  #   enabled: true
-  #   patch:
-  #     tolerations:
-  #       - key: "kubernetes.azure.com/scalesetpriority"
-  #         operator: "Equal"
-  #         value: "spot"
-  #         effect: "NoSchedule"
-  #     enabled: false
-  #   tolerations:
-  #     - key: "kubernetes.azure.com/scalesetpriority"
-  #       operator: "Equal"
-  #       value: "spot"
-  #       effect: "NoSchedule"
+  admissionWebhooks:
+    enabled: true
+    patch:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      enabled: false
+    tolerations:
+      - key: "kubernetes.azure.com/scalesetpriority"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
