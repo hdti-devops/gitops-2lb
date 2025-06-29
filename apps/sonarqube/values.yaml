@@ -1,0 +1,44 @@
+namespace: sonarqube
+credentials:
+  adminSecretName: sonar-admin-secret
+  adminUsername: admin
+  adminPassword: admin
+sonarqube-dce:
+  monitoringPasscodeSecretName: "sonar-admin-secret"
+  monitoringPasscodeSecretKey: "password"
+  tolerations:
+    - key: "kubernetes.azure.com/scalesetpriority"
+      operator: "Equal"
+      value: "spot"
+      effect: "NoSchedule"
+
+  ingress-nginx:
+    enabled: true
+    commonLabels:
+      app.kubernetes.io/part-of-service: sonarqube
+    controller:
+      ingressClassResource:
+        name: "nginx-sonarqube"
+      ingressClass: 'nginx-sonarqube'
+      admissionWebhooks:
+        enabled: true
+        tolerations:
+          - key: "kubernetes.azure.com/scalesetpriority"
+            operator: "Equal"
+            value: "spot"
+            effect: "NoSchedule"
+        patch:
+          enabled: false
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+
+    defaultBackend:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+
